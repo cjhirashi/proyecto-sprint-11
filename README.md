@@ -145,9 +145,7 @@ La región final se elige considerando el **mayor beneficio esperado** y un **ri
 │   └── geo_data_1.csv       # Datos región 1
 │   └── geo_data_2.csv       # Datos región 2
 ├── notebooks/
-│   ├── 01_exploracion.ipynb
-│   ├── 02_modelado_validacion.ipynb
-│   └── 03_beneficio_bootstrap.ipynb
+│   └── proyecto_sprint_11.ipynb
 ├── src/
 │   ├── data_loading.py
 │   ├── modeling.py
