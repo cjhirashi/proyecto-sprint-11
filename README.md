@@ -141,18 +141,16 @@ La región final se elige considerando el **mayor beneficio esperado** y un **ri
 ```bash
 .
 ├── datasets/
-│   └── geo_data_0.csv       # Datos región 0
-│   └── geo_data_1.csv       # Datos región 1
+│   ├── geo_data_0.csv       # Datos región 0
+│   ├── geo_data_1.csv       # Datos región 1
 │   └── geo_data_2.csv       # Datos región 2
 ├── notebooks/
-│   ├── 01_exploracion.ipynb
-│   ├── 02_modelado_validacion.ipynb
-│   └── 03_beneficio_bootstrap.ipynb
+│   └── proyecto_sprint_11.ipynb  # Notebook único con todo el desarrollo del proyecto
 ├── src/
-│   ├── data_loading.py
-│   ├── modeling.py
-│   ├── economics.py
-│   └── bootstrap.py
+│   ├── data_loading.py      # Funciones para cargar datasets y preparar variables
+│   ├── modeling.py          # Funciones para entrenar y validar el modelo de regresión lineal
+│   ├── economics.py          # Funciones para cálculo de beneficios y selección de pozos top-200
+│   └── bootstrap.py          # Funciones para aplicar bootstrapping y evaluar riesgos/intervalos de confianza
 ├── reports/
 │   └── figuras/             # Gráficos y visualizaciones
 ├── environment.yml          # Entorno reproducible con Conda
