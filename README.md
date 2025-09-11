@@ -141,8 +141,8 @@ La región final se elige considerando el **mayor beneficio esperado** y un **ri
 ```bash
 .
 ├── datasets/
-│   └── geo_data_0.csv       # Datos región 0
-│   └── geo_data_1.csv       # Datos región 1
+│   ├── geo_data_0.csv       # Datos región 0
+│   ├── geo_data_1.csv       # Datos región 1
 │   └── geo_data_2.csv       # Datos región 2
 ├── notebooks/
 │   └── proyecto_sprint_11.ipynb
