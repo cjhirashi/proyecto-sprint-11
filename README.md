@@ -78,50 +78,29 @@ La región final se elige considerando el **mayor beneficio esperado** y un **ri
    1.2 **Configuración Inicial**  
 
 2. **Carga y Exploración de Datasets**  
-   2.1 **Cargar Datasets**  
-   - Revisión de dimensiones y primeras filas.  
-   - Conclusión Sección 2.1 — Cargar Datasets.  
+   2.1 **Cargar Datasets**   
    2.2 **Validación de estructura y tipos de datos**  
-   - Conclusión Sección 2.2 — Validación de estructura y tipos de datos.  
    2.3 **Revisión de valores nulos y duplicados**  
-   - Conclusión Sección 2.3 — Revisión de valores nulos y duplicados.  
    2.4 **Análisis exploratorio inicial**  
-   - Conclusión Sección 2.4 — Conclusiones de la correlación de variables.  
    2.5 **Visualización exploratoria complementaria**  
-   - Conclusión Sección 2.5 — Conclusiones de los boxplots comparativos.  
-   - Conclusión Sección 2 — Carga y exploración de datasets.  
-   - Resumen global de hallazgos exploratorios.  
 
 3. **Modelado y validación de predicciones**  
    3.1 **Preparación de los datos de entrenamiento y validación**  
-   - Conclusión Sección 3.1 — Conclusiones de la preparación de datos.  
    3.2 **Entrenamiento de modelos de regresión lineal**  
-   - Conclusión Sección 3.2 — Entrenamiento de modelos de regresión lineal.  
-   3.3 **Evaluación de modelos en conjunto de validación**  
-   - Conclusión Sección 3.3 — Evaluación de modelos en conjunto de validación.  
-   3.4 **Almacenamiento de predicciones y valores reales**  
-   - Conclusión Sección 3.4 — Almacenamiento de predicciones y valores reales.  
-   - Conclusión Sección 3 — Modelado y validación de predicciones.  
-   - Resumen global de hallazgos del modelado.  
+   3.3 **Evaluación de modelos en conjunto de validación**   
+   3.4 **Almacenamiento de predicciones y valores reales**
 
 4. **Estimación de beneficios y análisis de riesgos con bootstrapping**  
    4.1 **Preparación para el cálculo de beneficios**  
-   - Conclusión Sección 4.1 — Preparación para el cálculo de beneficios.  
-   4.2 **Selección de los 200 pozos más prometedores por región**  
-   - Conclusión Sección 4.2 — Selección de los 200 pozos más prometedores por región.  
-   4.3 **Estimación del beneficio esperado por región**  
-   - Conclusión Sección 4.3 — Estimación del beneficio esperado por región.  
+   4.2 **Selección de los 200 pozos más prometedores por región**   
+   4.3 **Estimación del beneficio esperado por región**   
    4.4 **Bootstrapping de beneficios y riesgo por región**  
-   - Conclusión Sección 4.4 — Bootstrapping de beneficios y riesgo por región.  
    4.5 **Visualizaciones de la distribución de beneficios**  
    - 4.5.1 Histogramas de distribución por región  
-     - Conclusión Sección 4.5.1 — Histogramas de distribución por región.  
    - 4.5.2 Comparación de beneficios promedio por región  
-     - Conclusión Sección 4.5.2 — Comparación de beneficios promedio por región.  
+
 
 5. **Conclusiones finales y recomendación del proyecto**  
-   - Conclusión general.  
-
 
 ---
 
