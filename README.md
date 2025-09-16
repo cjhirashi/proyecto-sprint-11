@@ -73,49 +73,55 @@ La región final se elige considerando el **mayor beneficio esperado** y un **ri
 
 ### 📒 Pasos en el Notebook
 
-1. **Encabezado y configuración inicial**  
-   - Objetivo del proyecto y explicación del contexto.  
-   - Importación de librerías y configuración visual.  
+1. **Sprint 11 - Selección de Región Petrolera en OilyGiant**  
+   1.1 **Objetivo del Proyecto y Contexto**  
+   1.2 **Configuración Inicial**  
 
-2. **Carga y exploración de datasets**  
-   - Cargar los tres archivos `geo_data_0.csv`, `geo_data_1.csv`, `geo_data_2.csv`.  
-   - Revisión de dimensiones, tipos de datos y primeras filas.  
-   - Validación de nulos y valores atípicos.  
+2. **Carga y Exploración de Datasets**  
+   2.1 **Cargar Datasets**  
+   - Revisión de dimensiones y primeras filas.  
+   - Conclusión Sección 2.1 — Cargar Datasets.  
+   2.2 **Validación de estructura y tipos de datos**  
+   - Conclusión Sección 2.2 — Validación de estructura y tipos de datos.  
+   2.3 **Revisión de valores nulos y duplicados**  
+   - Conclusión Sección 2.3 — Revisión de valores nulos y duplicados.  
+   2.4 **Análisis exploratorio inicial**  
+   - Conclusión Sección 2.4 — Conclusiones de la correlación de variables.  
+   2.5 **Visualización exploratoria complementaria**  
+   - Conclusión Sección 2.5 — Conclusiones de los boxplots comparativos.  
+   - Conclusión Sección 2 — Carga y exploración de datasets.  
+   - Resumen global de hallazgos exploratorios.  
 
-3. **Entrenamiento y validación de modelos por región**  
-   - División 75:25 en entrenamiento y validación.  
-   - Entrenamiento de regresión lineal.  
-   - Generación de predicciones en el conjunto de validación.  
-   - Cálculo de **RMSE** y volumen medio de reservas predicho.  
-   - Análisis inicial de resultados.  
+3. **Modelado y validación de predicciones**  
+   3.1 **Preparación de los datos de entrenamiento y validación**  
+   - Conclusión Sección 3.1 — Conclusiones de la preparación de datos.  
+   3.2 **Entrenamiento de modelos de regresión lineal**  
+   - Conclusión Sección 3.2 — Entrenamiento de modelos de regresión lineal.  
+   3.3 **Evaluación de modelos en conjunto de validación**  
+   - Conclusión Sección 3.3 — Evaluación de modelos en conjunto de validación.  
+   3.4 **Almacenamiento de predicciones y valores reales**  
+   - Conclusión Sección 3.4 — Almacenamiento de predicciones y valores reales.  
+   - Conclusión Sección 3 — Modelado y validación de predicciones.  
+   - Resumen global de hallazgos del modelado.  
 
-4. **Automatización del flujo y aplicación a las 3 regiones**  
-   - Definición de funciones para cargar datos, entrenar, validar y obtener métricas.  
-   - Ejecución de los pasos previos en las tres regiones.  
+4. **Estimación de beneficios y análisis de riesgos con bootstrapping**  
+   4.1 **Preparación para el cálculo de beneficios**  
+   - Conclusión Sección 4.1 — Preparación para el cálculo de beneficios.  
+   4.2 **Selección de los 200 pozos más prometedores por región**  
+   - Conclusión Sección 4.2 — Selección de los 200 pozos más prometedores por región.  
+   4.3 **Estimación del beneficio esperado por región**  
+   - Conclusión Sección 4.3 — Estimación del beneficio esperado por región.  
+   4.4 **Bootstrapping de beneficios y riesgo por región**  
+   - Conclusión Sección 4.4 — Bootstrapping de beneficios y riesgo por región.  
+   4.5 **Visualizaciones de la distribución de beneficios**  
+   - 4.5.1 Histogramas de distribución por región  
+     - Conclusión Sección 4.5.1 — Histogramas de distribución por región.  
+   - 4.5.2 Comparación de beneficios promedio por región  
+     - Conclusión Sección 4.5.2 — Comparación de beneficios promedio por región.  
 
-5. **Preparación para cálculo de ganancias**  
-   - Almacenamiento de variables necesarias para el cálculo económico.  
-   - Comparación del punto de equilibrio (111.1 unidades por pozo) con la media de reservas por región.  
-   - Conclusiones preliminares de viabilidad.  
+5. **Conclusiones finales y recomendación del proyecto**  
+   - Conclusión general.  
 
-6. **Selección de pozos top-200 por región**  
-   - Seleccionar los 200 pozos con mayores predicciones en cada región.  
-   - Calcular el volumen total estimado y el beneficio esperado.  
-
-7. **Cálculo de beneficio por región**  
-   - Función para estimar la ganancia total de los pozos seleccionados.  
-   - Comparación de beneficios entre regiones.  
-   - Identificación preliminar de la mejor región.  
-
-8. **Bootstrapping (1000 iteraciones)**  
-   - Aplicación de la técnica de remuestreo sobre las predicciones top-200.  
-   - Cálculo de beneficio promedio, intervalo de confianza al 95% y riesgo de pérdida.  
-   - Comparación de regiones considerando beneficio esperado y riesgo < 2.5%.  
-
-9. **Conclusiones y recomendación final**  
-   - Resumen de resultados obtenidos en todas las etapas.  
-   - Recomendación de la región óptima para invertir.  
-   - Validación de si coincide con la elección preliminar.  
 
 ---
 
@@ -177,7 +183,17 @@ La región final se elige considerando el **mayor beneficio esperado** y un **ri
 
 ## 📊 Conclusiones y Resultados Esperados
 
-(Se completará al final del proyecto con base en resultados reales).
+El análisis completo permitió identificar la región óptima para abrir los 200 pozos de petróleo, considerando tanto los beneficios esperados como el riesgo de pérdidas:
+
+- El modelo de **regresión lineal** proporcionó predicciones adecuadas del volumen de reservas en cada región.  
+- El cálculo de beneficios con los **200 pozos más prometedores** mostró que la **Región 1** era competitiva en términos de ingresos.  
+- El **bootstrapping (1000 iteraciones)** confirmó que la **Región 1**:
+  - Obtuvo el **beneficio promedio más alto**: 4.32M USD.  
+  - Presentó un **intervalo de confianza del 95%** entre 168K y 8.15M USD.  
+  - Fue la **única región con riesgo de pérdida < 2.5% (1.90%)**.  
+- Las **visualizaciones** reforzaron estos hallazgos, mostrando distribuciones más estables y centradas en beneficios positivos para la Región 1.  
+
+📌 **Conclusión final**: La **Región 1** es la mejor candidata para la inversión en los 200 pozos, ya que combina el **mayor beneficio esperado** con el **menor riesgo**, cumpliendo los criterios de negocio establecidos.
 
 ---
 
