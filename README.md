@@ -106,18 +106,96 @@ La región final se elige considerando el **mayor beneficio esperado** y un **ri
 
 ### ⚙️ Pasos previstos para `src/`
 
-* **`data_loading.py`**
+- **`data_loading.py`**
+  - `load_region_csv(path, usecols=None)`  
+    **Atributos:**  
+    - `path` (str): Ruta del archivo CSV de la región (ej. `"datasets/geo_data_0.csv"`).  
+    - `usecols` (list[str] | None): Columnas a cargar; si es `None`, carga todas.  
+    **Descripción:** Carga el dataset de una región y valida que existan las columnas esperadas (`id`, `f0`, `f1`, `f2`, `product`).  
 
-  * Funciones para cargar datasets de cada región.
-* **`modeling.py`**
+  - `prepare_features_target(df, target_col="product", feature_cols=None)`  
+    **Atributos:**  
+    - `df` (pd.DataFrame): Datos completos de la región.  
+    - `target_col` (str): Nombre de la columna objetivo; por defecto `"product"`.  
+    - `feature_cols` (list[str] | None): Lista de columnas a usar como features; si es `None`, usa todas excepto `id` y la columna objetivo.  
+    **Descripción:** Separa el DataFrame en variables predictoras (X) y variable objetivo (y).  
 
-  * Función para entrenar regresión lineal y evaluar métricas.
-* **`economics.py`**
+---
 
-  * Función para calcular beneficio esperado a partir de predicciones.
-* **`bootstrap.py`**
+- **`modeling.py`**
+  - `split_data(X, y, test_size=0.25, random_state=12345)`  
+    **Atributos:**  
+    - `X` (pd.DataFrame): Variables predictoras.  
+    - `y` (pd.Series): Variable objetivo.  
+    - `test_size` (float): Proporción para validación (ej. 0.25 = 25%).  
+    - `random_state` (int): Semilla para reproducibilidad.  
+    **Descripción:** Divide los datos en entrenamiento y validación (75:25 por defecto).  
 
-  * Función para aplicar bootstrapping y obtener distribución de beneficios.
+  - `train_linear_regression(X_train, y_train)`  
+    **Atributos:**  
+    - `X_train` (pd.DataFrame): Features del conjunto de entrenamiento.  
+    - `y_train` (pd.Series): Valores reales del conjunto de entrenamiento.  
+    **Descripción:** Entrena un modelo de regresión lineal con scikit-learn.  
+
+  - `evaluate_model(model, X_valid, y_valid)`  
+    **Atributos:**  
+    - `model` (LinearRegression): Modelo previamente entrenado.  
+    - `X_valid` (pd.DataFrame): Features del conjunto de validación.  
+    - `y_valid` (pd.Series): Valores reales del conjunto de validación.  
+    **Descripción:** Evalúa el modelo en validación y devuelve métricas: **RMSE**, media de predicciones y media real.  
+
+  - `predict_vs_real_df(model, X_valid, y_valid, pred_col="pred", real_col="real")`  
+    **Atributos:**  
+    - `model` (LinearRegression): Modelo entrenado.  
+    - `X_valid` (pd.DataFrame): Features de validación.  
+    - `y_valid` (pd.Series): Valores reales.  
+    - `pred_col` (str): Nombre de la columna de predicciones.  
+    - `real_col` (str): Nombre de la columna de valores reales.  
+    **Descripción:** Devuelve un DataFrame con dos columnas (`pred`, `real`) para comparar predicciones y valores reales.  
+
+---
+
+- **`economics.py`**
+  - `select_top_k_by_pred(preds_df, k=200, pred_col="pred")`  
+    **Atributos:**  
+    - `preds_df` (pd.DataFrame): DataFrame con columnas de predicción y valores reales.  
+    - `k` (int): Número de pozos a seleccionar; por defecto 200.  
+    - `pred_col` (str): Nombre de la columna de predicciones.  
+    **Descripción:** Selecciona los `k` pozos con mayor valor de predicción.  
+
+  - `compute_profit_from_selected(selected_df, ingreso_por_unidad=4500, costos_inversion=100_000_000, real_col="real")`  
+    **Atributos:**  
+    - `selected_df` (pd.DataFrame): DataFrame con los pozos seleccionados.  
+    - `ingreso_por_unidad` (float): Ingreso en USD por cada unidad de producción (ej. 4500 USD).  
+    - `costos_inversion` (float): Inversión total en USD (ej. 100,000,000).  
+    - `real_col` (str): Columna con los valores reales de producción.  
+    **Descripción:** Calcula el beneficio neto total usando los valores reales de los pozos seleccionados.  
+
+  - `region_profit_summary(preds_df, top_k=200, ingreso_por_unidad=4500, costos_inversion=100_000_000, region_name=None)`  
+    **Atributos:**  
+    - `preds_df` (pd.DataFrame): DataFrame con predicciones y valores reales.  
+    - `top_k` (int): Número de pozos a considerar (por defecto 200).  
+    - `ingreso_por_unidad` (float): Ingreso en USD por unidad de producción.  
+    - `costos_inversion` (float): Inversión total en USD.  
+    - `region_name` (str | None): Nombre de la región (opcional).  
+    **Descripción:** Devuelve un diccionario resumen con nombre de región, total real top-k y beneficio calculado.  
+
+---
+
+- **`bootstrap.py`**
+  - `bootstrap_benefit(preds_df, ingreso_por_unidad, costos_inversion, n_iter=1000, sample_size=500, top_k=200, pred_col="pred", real_col="real", random_state=12345)`  
+    **Atributos:**  
+    - `preds_df` (pd.DataFrame): DataFrame con columnas de predicciones y valores reales.  
+    - `ingreso_por_unidad` (float): Ingreso por unidad de producción.  
+    - `costos_inversion` (float): Inversión total en USD.  
+    - `n_iter` (int): Número de iteraciones de bootstrapping (ej. 1000).  
+    - `sample_size` (int): Tamaño de la muestra con reemplazo en cada iteración (ej. 500 pozos).  
+    - `top_k` (int): Número de pozos seleccionados por predicción en cada muestra (ej. 200).  
+    - `pred_col` (str): Nombre de la columna de predicciones.  
+    - `real_col` (str): Nombre de la columna de valores reales.  
+    - `random_state` (int): Semilla para reproducibilidad.  
+    **Descripción:** Ejecuta bootstrapping simulando campañas de exploración, retorna un vector con los beneficios simulados y un resumen con promedio, intervalo de confianza al 95% y riesgo de pérdida.  
+
 
 ---
 
