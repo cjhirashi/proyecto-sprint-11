@@ -222,6 +222,11 @@ El análisis completo permitió identificar la región óptima para abrir los 20
 
   ```bash
   conda env create -f environment.yml
+  ```
+
+* **Activar entorno**:
+
+  ```bash
   conda activate proyecto-sprint-11
   ```
 
